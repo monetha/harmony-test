@@ -1,0 +1,12 @@
+{
+  "url": "https://api.s1.b.hmny.io",
+  "chainType": "hmy",
+  "chainId": 2,
+  "shardID": 1,
+  "privateKey": "01f903ce0c960ff3a9e68e80ff5ffc344358d80ce1c221c3f9711af07f83a3bd",
+  "contracts": {
+    "passportFactory": "0xB6E2391052c716A359ed426eB464eAe2e22612E7",
+    "passportRegistry": "0xcd45FdE7086BF341045dd4d6aba2e9B6121222fA",
+    "passportLogic": "0xa7833F8E35d5ffbA1A181cA010BbD197751Fd810"
+  }
+}
