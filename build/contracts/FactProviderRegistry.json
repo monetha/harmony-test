@@ -1,0 +1,2779 @@
+{
+  "contractName": "FactProviderRegistry",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_token",
+          "type": "address"
+        }
+      ],
+      "name": "reclaimToken",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "factProviders",
+      "outputs": [
+        {
+          "name": "initialized",
+          "type": "bool"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "reputation_passport",
+          "type": "address"
+        },
+        {
+          "name": "website",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "reclaimEther",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        },
+        {
+          "name": "_data",
+          "type": "bytes"
+        }
+      ],
+      "name": "tokenFallback",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "fallback"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "factProvider",
+          "type": "address"
+        }
+      ],
+      "name": "FactProviderAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "factProvider",
+          "type": "address"
+        }
+      ],
+      "name": "FactProviderUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "factProvider",
+          "type": "address"
+        }
+      ],
+      "name": "FactProviderDeleted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "previousOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipRenounced",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_factProvider",
+          "type": "address"
+        },
+        {
+          "name": "_factProviderName",
+          "type": "string"
+        },
+        {
+          "name": "_factProviderReputationPassport",
+          "type": "address"
+        },
+        {
+          "name": "_factProviderWebsite",
+          "type": "string"
+        }
+      ],
+      "name": "setFactProviderInfo",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_factProvider",
+          "type": "address"
+        }
+      ],
+      "name": "deleteFactProviderInfo",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405260008054600160a060020a03191633179055341561002157600080fd5b610ae3806100306000396000f3006080604052600436106100985763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166317ffc32081146100a75780631df84d87146100ca57806353cb9293146100eb578063715018a61461020e57806385301a01146102235780638da5cb5b146102625780639f727c2714610293578063c0ee0b8a146102a8578063f2fde38b146102d9575b3480156100a457600080fd5b50005b3480156100b357600080fd5b506100c8600160a060020a03600435166102fa565b005b3480156100d657600080fd5b506100c8600160a060020a03600435166103c6565b3480156100f757600080fd5b5061010c600160a060020a0360043516610495565b60405180851515151581526020018060200184600160a060020a0316600160a060020a0316815260200180602001838103835286818151815260200191508051906020019080838360005b8381101561016f578181015183820152602001610157565b50505050905090810190601f16801561019c5780820380516001836020036101000a031916815260200191505b50838103825284518152845160209182019186019080838360005b838110156101cf5781810151838201526020016101b7565b50505050905090810190601f1680156101fc5780820380516001836020036101000a031916815260200191505b50965050505050505060405180910390f35b34801561021a57600080fd5b506100c86105e4565b34801561022f57600080fd5b506100c8600160a060020a0360048035821691602480358082019390810135926044351691606435908101910135610650565b34801561026e57600080fd5b5061027761081d565b60408051600160a060020a039092168252519081900360200190f35b34801561029f57600080fd5b506100c861082c565b3480156102b457600080fd5b506100c860048035600160a060020a031690602480359160443591820191013561087e565b3480156102e557600080fd5b506100c8600160a060020a0360043516610883565b60008054600160a060020a0316331461031257600080fd5b604080517f70a082310000000000000000000000000000000000000000000000000000000081523060048201529051600160a060020a038416916370a082319160248083019260209291908290030181600087803b15801561037357600080fd5b505af1158015610387573d6000803e3d6000fd5b505050506040513d602081101561039d57600080fd5b50516000549091506103c290600160a060020a0384811691168363ffffffff6108a316565b5050565b600054600160a060020a031633146103dd57600080fd5b600160a060020a03811660009081526001602052604090205460ff161561049257600160a060020a03811660009081526001602081905260408220805460ff19168155919061042e908301826109d8565b60028201805473ffffffffffffffffffffffffffffffffffffffff1916905561045b6003830160006109d8565b5050604051600160a060020a038216907fffcf9fb4992cc4ee4022ab3c2c5fa4914c18a25a2dc1614fc52c3ba8bbebf0aa90600090a25b50565b600160208181526000928352604092839020805481840180548651600261010097831615979097026000190190911695909504601f810185900485028601850190965285855260ff909116949193929091908301828280156105385780601f1061050d57610100808354040283529160200191610538565b820191906000526020600020905b81548152906001019060200180831161051b57829003601f168201915b505050506002838101546003850180546040805160206101006001851615026000190190931695909504601f81018390048302860183019091528085529596600160a060020a03909316959294509091908301828280156105da5780601f106105af576101008083540402835291602001916105da565b820191906000526020600020905b8154815290600101906020018083116105bd57829003601f168201915b5050505050905084565b600054600160a060020a031633146105fb57600080fd5b60008054604051600160a060020a03909116917ff8df31144d9c2f0f6b59d69b8b98abd5459d07f2742c4df920b25aae33c6482091a26000805473ffffffffffffffffffffffffffffffffffffffff19169055565b60008054600160a060020a0316331461066857600080fd5b50600160a060020a0386166000908152600160208181526040928390205483516080810185529283528351601f890183900483028101830190945287845260ff1692828201918990899081908401838280828437820191505050505050815260200185600160a060020a0316815260200184848080601f01602080910402602001604051908101604052809392919081815260200183838082843750505092909352505050600160a060020a03881660009081526001602081815260409092208351815460ff1916901515178155838301518051919361074d93850192910190610a1c565b50604082015160028201805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a039092169190911790556060820151805161079c916003840191602090910190610a1c565b5090505080156107df57604051600160a060020a038816907ff5373d11a64f7dfd39311b28060d0cc68d73cde4dbb253a9cfd6b00f871932a490600090a2610814565b604051600160a060020a038816907f49fe72d660cc80a367041ae43bb1e4956396956549f81c0e6a0adfbc4a8698f790600090a25b50505050505050565b600054600160a060020a031681565b600054600160a060020a0316331461084357600080fd5b60008054604051600160a060020a0390911691303180156108fc02929091818181858888f19350505050158015610492573d6000803e3d6000fd5b600080fd5b600054600160a060020a0316331461089a57600080fd5b6104928161095b565b82600160a060020a031663a9059cbb83836040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083600160a060020a0316600160a060020a0316815260200182815260200192505050602060405180830381600087803b15801561091f57600080fd5b505af1158015610933573d6000803e3d6000fd5b505050506040513d602081101561094957600080fd5b5051151561095657600080fd5b505050565b600160a060020a038116151561097057600080fd5b60008054604051600160a060020a03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b50805460018160011615610100020316600290046000825580601f106109fe5750610492565b601f0160209004906000526020600020908101906104929190610a9a565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f10610a5d57805160ff1916838001178555610a8a565b82800160010185558215610a8a579182015b82811115610a8a578251825591602001919060010190610a6f565b50610a96929150610a9a565b5090565b610ab491905b80821115610a965760008155600101610aa0565b905600a165627a7a723058208478f4c376b5717f1210b5592d195b4f4ce6cc795eeec599825956e36a079d1d0029",
+  "deployedBytecode": "0x6080604052600436106100985763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166317ffc32081146100a75780631df84d87146100ca57806353cb9293146100eb578063715018a61461020e57806385301a01146102235780638da5cb5b146102625780639f727c2714610293578063c0ee0b8a146102a8578063f2fde38b146102d9575b3480156100a457600080fd5b50005b3480156100b357600080fd5b506100c8600160a060020a03600435166102fa565b005b3480156100d657600080fd5b506100c8600160a060020a03600435166103c6565b3480156100f757600080fd5b5061010c600160a060020a0360043516610495565b60405180851515151581526020018060200184600160a060020a0316600160a060020a0316815260200180602001838103835286818151815260200191508051906020019080838360005b8381101561016f578181015183820152602001610157565b50505050905090810190601f16801561019c5780820380516001836020036101000a031916815260200191505b50838103825284518152845160209182019186019080838360005b838110156101cf5781810151838201526020016101b7565b50505050905090810190601f1680156101fc5780820380516001836020036101000a031916815260200191505b50965050505050505060405180910390f35b34801561021a57600080fd5b506100c86105e4565b34801561022f57600080fd5b506100c8600160a060020a0360048035821691602480358082019390810135926044351691606435908101910135610650565b34801561026e57600080fd5b5061027761081d565b60408051600160a060020a039092168252519081900360200190f35b34801561029f57600080fd5b506100c861082c565b3480156102b457600080fd5b506100c860048035600160a060020a031690602480359160443591820191013561087e565b3480156102e557600080fd5b506100c8600160a060020a0360043516610883565b60008054600160a060020a0316331461031257600080fd5b604080517f70a082310000000000000000000000000000000000000000000000000000000081523060048201529051600160a060020a038416916370a082319160248083019260209291908290030181600087803b15801561037357600080fd5b505af1158015610387573d6000803e3d6000fd5b505050506040513d602081101561039d57600080fd5b50516000549091506103c290600160a060020a0384811691168363ffffffff6108a316565b5050565b600054600160a060020a031633146103dd57600080fd5b600160a060020a03811660009081526001602052604090205460ff161561049257600160a060020a03811660009081526001602081905260408220805460ff19168155919061042e908301826109d8565b60028201805473ffffffffffffffffffffffffffffffffffffffff1916905561045b6003830160006109d8565b5050604051600160a060020a038216907fffcf9fb4992cc4ee4022ab3c2c5fa4914c18a25a2dc1614fc52c3ba8bbebf0aa90600090a25b50565b600160208181526000928352604092839020805481840180548651600261010097831615979097026000190190911695909504601f810185900485028601850190965285855260ff909116949193929091908301828280156105385780601f1061050d57610100808354040283529160200191610538565b820191906000526020600020905b81548152906001019060200180831161051b57829003601f168201915b505050506002838101546003850180546040805160206101006001851615026000190190931695909504601f81018390048302860183019091528085529596600160a060020a03909316959294509091908301828280156105da5780601f106105af576101008083540402835291602001916105da565b820191906000526020600020905b8154815290600101906020018083116105bd57829003601f168201915b5050505050905084565b600054600160a060020a031633146105fb57600080fd5b60008054604051600160a060020a03909116917ff8df31144d9c2f0f6b59d69b8b98abd5459d07f2742c4df920b25aae33c6482091a26000805473ffffffffffffffffffffffffffffffffffffffff19169055565b60008054600160a060020a0316331461066857600080fd5b50600160a060020a0386166000908152600160208181526040928390205483516080810185529283528351601f890183900483028101830190945287845260ff1692828201918990899081908401838280828437820191505050505050815260200185600160a060020a0316815260200184848080601f01602080910402602001604051908101604052809392919081815260200183838082843750505092909352505050600160a060020a03881660009081526001602081815260409092208351815460ff1916901515178155838301518051919361074d93850192910190610a1c565b50604082015160028201805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a039092169190911790556060820151805161079c916003840191602090910190610a1c565b5090505080156107df57604051600160a060020a038816907ff5373d11a64f7dfd39311b28060d0cc68d73cde4dbb253a9cfd6b00f871932a490600090a2610814565b604051600160a060020a038816907f49fe72d660cc80a367041ae43bb1e4956396956549f81c0e6a0adfbc4a8698f790600090a25b50505050505050565b600054600160a060020a031681565b600054600160a060020a0316331461084357600080fd5b60008054604051600160a060020a0390911691303180156108fc02929091818181858888f19350505050158015610492573d6000803e3d6000fd5b600080fd5b600054600160a060020a0316331461089a57600080fd5b6104928161095b565b82600160a060020a031663a9059cbb83836040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083600160a060020a0316600160a060020a0316815260200182815260200192505050602060405180830381600087803b15801561091f57600080fd5b505af1158015610933573d6000803e3d6000fd5b505050506040513d602081101561094957600080fd5b5051151561095657600080fd5b505050565b600160a060020a038116151561097057600080fd5b60008054604051600160a060020a03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b50805460018160011615610100020316600290046000825580601f106109fe5750610492565b601f0160209004906000526020600020908101906104929190610a9a565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f10610a5d57805160ff1916838001178555610a8a565b82800160010185558215610a8a579182015b82811115610a8a578251825591602001919060010190610a6f565b50610a96929150610a9a565b5090565b610ab491905b80821115610a965760008155600101610aa0565b905600a165627a7a723058208478f4c376b5717f1210b5592d195b4f4ce6cc795eeec599825956e36a079d1d0029",
+  "sourceMap": "375:2393:0:-;;;567:5:30;:18;;-1:-1:-1;;;;;;567:18:30;575:10;567:18;;;958:9:28;:14;950:23;;;;;;375:2393:0;;;;;;",
+  "deployedSourceMap": "375:2393:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;375:2393:0;;599:152:27;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;599:152:27;-1:-1:-1;;;;;599:152:27;;;;;;;2516:250:0;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;2516:250:0;-1:-1:-1;;;;;2516:250:0;;;;;1094:57;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;1094:57:0;-1:-1:-1;;;;;1094:57:0;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;1094:57:0;-1:-1:-1;;;;;1094:57:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;1094:57:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;1094:57:0;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;1094:57:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1001:111:30;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1001:111:30;;;;1617:752:0;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;1617:752:0;-1:-1:-1;;;;;1617:752:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;238:20:30;;8:9:-1;5:2;;;30:1;27;20:12;5:2;238:20:30;;;;;;;;-1:-1:-1;;;;;238:20:30;;;;;;;;;;;;;;1189:91:28;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1189:91:28;;;;637:160:29;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;637:160:29;;;;-1:-1:-1;;;;;637:160:29;;;;;;;;;;;;;;;;1274:103:30;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;1274:103:30;-1:-1:-1;;;;;1274:103:30;;;;;599:152:27;665:15;719:5:30;;-1:-1:-1;;;;;719:5:30;705:10;:19;697:28;;;;;;683:22:27;;;;;;700:4;683:22;;;;;;-1:-1:-1;;;;;683:16:27;;;;;:22;;;;;;;;;;;;;;-1:-1:-1;683:16:27;:22;;;5:2:-1;;;;30:1;27;20:12;5:2;683:22:27;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;683:22:27;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;683:22:27;731:5;;683:22;;-1:-1:-1;711:35:27;;-1:-1:-1;;;;;711:19:27;;;;731:5;683:22;711:35;:19;:35;:::i;:::-;599:152;;:::o;2516:250:0:-;719:5:30;;-1:-1:-1;;;;;719:5:30;705:10;:19;697:28;;;;;;-1:-1:-1;;;;;2604:28:0;;;;;;:13;:28;;;;;:40;;;2600:160;;;-1:-1:-1;;;;;2667:28:0;;;;;;:13;:28;;;;;;;2660:35;;-1:-1:-1;;2660:35:0;;;2667:28;;2660:35;;;;2667:28;2660:35;:::i;:::-;;;;;;-1:-1:-1;;2660:35:0;;;;;;;;;:::i;:::-;-1:-1:-1;;2715:34:0;;-1:-1:-1;;;;;2715:34:0;;;;;;;;2600:160;2516:250;:::o;1094:57::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1094:57:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;1094:57:0;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1094:57:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;1094:57:0;;;;;;-1:-1:-1;1094:57:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;1001:111:30:-;719:5;;-1:-1:-1;;;;;719:5:30;705:10;:19;697:28;;;;;;1077:5;;;1058:25;;-1:-1:-1;;;;;1077:5:30;;;;1058:25;;;1105:1;1089:18;;-1:-1:-1;;1089:18:30;;;1001:111::o;1617:752:0:-;1832:28;719:5:30;;-1:-1:-1;;;;;719:5:30;705:10;:19;697:28;;;;;;-1:-1:-1;;;;;;1896:28:0;;;;;;:13;:28;;;;;;;;;:40;1978:213;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1896:40;;;1978:213;;;;2048:17;;;;;;1978:213;;2048:17;;;;1978:213;;;;;;;;;;;;;;;2101:31;-1:-1:-1;;;;;1978:213:0;;;;;2156:20;;1978:213;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;1978:213:0;;;;-1:-1:-1;;;;;;;;1947:28:0;;;;;;:13;:28;;;;;;;;:244;;;;-1:-1:-1;;1947:244:0;;;;;;;;;;;;;:28;;:244;;;;;;;;;:::i;:::-;-1:-1:-1;1947:244:0;;;;;;;;;-1:-1:-1;;1947:244:0;-1:-1:-1;;;;;1947:244:0;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;2206:23;2202:161;;;2250:34;;-1:-1:-1;;;;;2250:34:0;;;;;;;;2202:161;;;2320:32;;-1:-1:-1;;;;;2320:32:0;;;;;;;;2202:161;1617:752;;;;;;;:::o;238:20:30:-;;;-1:-1:-1;;;;;238:20:30;;:::o;1189:91:28:-;719:5:30;;-1:-1:-1;;;;;719:5:30;705:10;:19;697:28;;;;;;1238:5:28;;;:37;;-1:-1:-1;;;;;1238:5:28;;;;1261:4;1253:21;1238:37;;;;;1253:21;;1238:37;:5;:37;1253:21;1238:5;:37;;;;;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;637:160:29;784:8;;;1274:103:30;719:5;;-1:-1:-1;;;;;719:5:30;705:10;:19;697:28;;;;;;1343:29;1362:9;1343:18;:29::i;368:149:33:-;483:6;-1:-1:-1;;;;;483:15:33;;499:3;504:6;483:28;;;;;;;;;;;;;-1:-1:-1;;;;;483:28:33;-1:-1:-1;;;;;483:28:33;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;483:28:33;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;483:28:33;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;483:28:33;475:37;;;;;;;;368:149;;;:::o;1512:171:30:-;-1:-1:-1;;;;;1582:23:30;;;;1574:32;;;;;;1638:5;;;1617:38;;-1:-1:-1;;;;;1617:38:30;;;;1638:5;;;1617:38;;;1661:5;:17;;-1:-1:-1;;1661:17:30;-1:-1:-1;;;;;1661:17:30;;;;;;;;;;1512:171::o;375:2393:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;375:2393:0;;;-1:-1:-1;375:2393:0;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"openzeppelin-solidity/contracts/ownership/Ownable.sol\";\nimport \"openzeppelin-solidity/contracts/ownership/HasNoEther.sol\";\nimport \"openzeppelin-solidity/contracts/ownership/HasNoTokens.sol\";\n\n/**\n * @title FactProviderRegistry\n * @dev This contract works as a registry of known fact providers that are using Monetha reputation platform.\n */\ncontract FactProviderRegistry is Ownable, HasNoEther, HasNoTokens {\n    /**\n     * @dev This event will be emitted every time a new fact provider is registered\n     */\n    event FactProviderAdded(address indexed factProvider);\n\n    /**\n     * @dev This event will be emitted every time the info of a fact provider is updated\n     */\n    event FactProviderUpdated(address indexed factProvider);\n\n    /**\n     * @dev This event will be emitted every time the fact provider is removed from the registry\n     */\n    event FactProviderDeleted(address indexed factProvider);\n\n    struct FactProviderInfo {\n        bool initialized;\n        string name;\n        address reputation_passport;\n        string website;\n    }\n\n    mapping(address => FactProviderInfo) public factProviders;\n\n    /**\n     * @dev Registers or updates a fact provider.\n     * @param _factProvider representing the address of fact provider, which is used to provide facts\n     * @param _factProviderName representing user friendly name of fact provider, e.g. Monetha Wallet\n     * @param _factProviderReputationPassport representing reputation passport address of fact provider (if exists)\n     * @param _factProviderWebsite representing website of fact provider\n     */\n    function setFactProviderInfo(\n        address _factProvider,\n        string _factProviderName,\n        address _factProviderReputationPassport,\n        string _factProviderWebsite\n    ) external onlyOwner {\n        bool initializedFactProvider;\n        initializedFactProvider = factProviders[_factProvider].initialized;\n\n        factProviders[_factProvider] = FactProviderInfo({\n            initialized : true,\n            name : _factProviderName,\n            reputation_passport : _factProviderReputationPassport,\n            website : _factProviderWebsite\n            });\n\n        if (initializedFactProvider) {\n            emit FactProviderUpdated(_factProvider);\n        } else {\n            emit FactProviderAdded(_factProvider);\n        }\n    }\n\n    /**\n     * @dev Removes a fact provider from the registry.\n     * @param _factProvider representing the address of fact provider\n     */\n    function deleteFactProviderInfo(address _factProvider) external onlyOwner {\n        if (factProviders[_factProvider].initialized) {\n            delete factProviders[_factProvider];\n\n            emit FactProviderDeleted(_factProvider);\n        }\n    }\n}",
+  "sourcePath": "C:\\src\\monetha\\reputation-js-sdk-example\\deployer\\tmp\\contracts\\FactProviderRegistry.sol",
+  "ast": {
+    "absolutePath": "/C/src/monetha/reputation-js-sdk-example/deployer/tmp/contracts/FactProviderRegistry.sol",
+    "exportedSymbols": {
+      "FactProviderRegistry": [
+        106
+      ]
+    },
+    "id": 107,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/ownership/Ownable.sol",
+        "file": "openzeppelin-solidity/contracts/ownership/Ownable.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 107,
+        "sourceUnit": 3505,
+        "src": "26:63:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/ownership/HasNoEther.sol",
+        "file": "openzeppelin-solidity/contracts/ownership/HasNoEther.sol",
+        "id": 3,
+        "nodeType": "ImportDirective",
+        "scope": 107,
+        "sourceUnit": 3394,
+        "src": "90:66:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/ownership/HasNoTokens.sol",
+        "file": "openzeppelin-solidity/contracts/ownership/HasNoTokens.sol",
+        "id": 4,
+        "nodeType": "ImportDirective",
+        "scope": 107,
+        "sourceUnit": 3419,
+        "src": "157:67:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 5,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3504,
+              "src": "408:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$3504",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 6,
+            "nodeType": "InheritanceSpecifier",
+            "src": "408:7:0"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 7,
+              "name": "HasNoEther",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3393,
+              "src": "417:10:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_HasNoEther_$3393",
+                "typeString": "contract HasNoEther"
+              }
+            },
+            "id": 8,
+            "nodeType": "InheritanceSpecifier",
+            "src": "417:10:0"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 9,
+              "name": "HasNoTokens",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3418,
+              "src": "429:11:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_HasNoTokens_$3418",
+                "typeString": "contract HasNoTokens"
+              }
+            },
+            "id": 10,
+            "nodeType": "InheritanceSpecifier",
+            "src": "429:11:0"
+          }
+        ],
+        "contractDependencies": [
+          3357,
+          3393,
+          3418,
+          3504
+        ],
+        "contractKind": "contract",
+        "documentation": "@title FactProviderRegistry\n@dev This contract works as a registry of known fact providers that are using Monetha reputation platform.",
+        "fullyImplemented": true,
+        "id": 106,
+        "linearizedBaseContracts": [
+          106,
+          3418,
+          3357,
+          3393,
+          3504
+        ],
+        "name": "FactProviderRegistry",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": "@dev This event will be emitted every time a new fact provider is registered",
+            "id": 14,
+            "name": "FactProviderAdded",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12,
+                  "indexed": true,
+                  "name": "factProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 14,
+                  "src": "571:28:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "571:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "570:30:0"
+            },
+            "src": "547:54:0"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev This event will be emitted every time the info of a fact provider is updated",
+            "id": 18,
+            "name": "FactProviderUpdated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 17,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16,
+                  "indexed": true,
+                  "name": "factProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 18,
+                  "src": "738:28:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 15,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "738:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "737:30:0"
+            },
+            "src": "712:56:0"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev This event will be emitted every time the fact provider is removed from the registry",
+            "id": 22,
+            "name": "FactProviderDeleted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 21,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 20,
+                  "indexed": true,
+                  "name": "factProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 22,
+                  "src": "913:28:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 19,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "913:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "912:30:0"
+            },
+            "src": "887:56:0"
+          },
+          {
+            "canonicalName": "FactProviderRegistry.FactProviderInfo",
+            "id": 31,
+            "members": [
+              {
+                "constant": false,
+                "id": 24,
+                "name": "initialized",
+                "nodeType": "VariableDeclaration",
+                "scope": 31,
+                "src": "983:16:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 23,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "983:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26,
+                "name": "name",
+                "nodeType": "VariableDeclaration",
+                "scope": 31,
+                "src": "1009:11:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 25,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1009:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 28,
+                "name": "reputation_passport",
+                "nodeType": "VariableDeclaration",
+                "scope": 31,
+                "src": "1030:27:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 27,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1030:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 30,
+                "name": "website",
+                "nodeType": "VariableDeclaration",
+                "scope": 31,
+                "src": "1067:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 29,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1067:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "FactProviderInfo",
+            "nodeType": "StructDefinition",
+            "scope": 106,
+            "src": "949:139:0",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 35,
+            "name": "factProviders",
+            "nodeType": "VariableDeclaration",
+            "scope": 106,
+            "src": "1094:57:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+              "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo)"
+            },
+            "typeName": {
+              "id": 34,
+              "keyType": {
+                "id": 32,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "1102:7:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1094:36:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+                "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 33,
+                "name": "FactProviderInfo",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 31,
+                "src": "1113:16:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage_ptr",
+                  "typeString": "struct FactProviderRegistry.FactProviderInfo"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 81,
+              "nodeType": "Block",
+              "src": "1822:547:0",
+              "statements": [
+                {
+                  "assignments": [],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 49,
+                      "name": "initializedFactProvider",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 82,
+                      "src": "1832:28:0",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "typeName": {
+                        "id": 48,
+                        "name": "bool",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1832:4:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 50,
+                  "initialValue": null,
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1832:28:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 56,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 51,
+                      "name": "initializedFactProvider",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49,
+                      "src": "1870:23:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 52,
+                          "name": "factProviders",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 35,
+                          "src": "1896:13:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+                            "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo storage ref)"
+                          }
+                        },
+                        "id": 54,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 53,
+                          "name": "_factProvider",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 37,
+                          "src": "1910:13:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "1896:28:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage",
+                          "typeString": "struct FactProviderRegistry.FactProviderInfo storage ref"
+                        }
+                      },
+                      "id": 55,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "initialized",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 24,
+                      "src": "1896:40:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "1870:66:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 57,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1870:66:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 67,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 58,
+                        "name": "factProviders",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 35,
+                        "src": "1947:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+                          "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo storage ref)"
+                        }
+                      },
+                      "id": 60,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 59,
+                        "name": "_factProvider",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 37,
+                        "src": "1961:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "1947:28:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage",
+                        "typeString": "struct FactProviderRegistry.FactProviderInfo storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "74727565",
+                          "id": 62,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "bool",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "2023:4:0",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          },
+                          "value": "true"
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 63,
+                          "name": "_factProviderName",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 39,
+                          "src": "2048:17:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_calldata_ptr",
+                            "typeString": "string calldata"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 64,
+                          "name": "_factProviderReputationPassport",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 41,
+                          "src": "2101:31:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 65,
+                          "name": "_factProviderWebsite",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 43,
+                          "src": "2156:20:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_calldata_ptr",
+                            "typeString": "string calldata"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 61,
+                        "name": "FactProviderInfo",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 31,
+                        "src": "1978:16:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_FactProviderInfo_$31_storage_ptr_$",
+                          "typeString": "type(struct FactProviderRegistry.FactProviderInfo storage pointer)"
+                        }
+                      },
+                      "id": 66,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "initialized",
+                        "name",
+                        "reputation_passport",
+                        "website"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "1978:213:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FactProviderInfo_$31_memory",
+                        "typeString": "struct FactProviderRegistry.FactProviderInfo memory"
+                      }
+                    },
+                    "src": "1947:244:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage",
+                      "typeString": "struct FactProviderRegistry.FactProviderInfo storage ref"
+                    }
+                  },
+                  "id": 68,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1947:244:0"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "id": 69,
+                    "name": "initializedFactProvider",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 49,
+                    "src": "2206:23:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "id": 79,
+                    "nodeType": "Block",
+                    "src": "2301:62:0",
+                    "statements": [
+                      {
+                        "eventCall": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 76,
+                              "name": "_factProvider",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 37,
+                              "src": "2338:13:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            ],
+                            "id": 75,
+                            "name": "FactProviderAdded",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 14,
+                            "src": "2320:17:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                              "typeString": "function (address)"
+                            }
+                          },
+                          "id": 77,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2320:32:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 78,
+                        "nodeType": "EmitStatement",
+                        "src": "2315:37:0"
+                      }
+                    ]
+                  },
+                  "id": 80,
+                  "nodeType": "IfStatement",
+                  "src": "2202:161:0",
+                  "trueBody": {
+                    "id": 74,
+                    "nodeType": "Block",
+                    "src": "2231:64:0",
+                    "statements": [
+                      {
+                        "eventCall": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 71,
+                              "name": "_factProvider",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 37,
+                              "src": "2270:13:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            ],
+                            "id": 70,
+                            "name": "FactProviderUpdated",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 18,
+                            "src": "2250:19:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                              "typeString": "function (address)"
+                            }
+                          },
+                          "id": 72,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2250:34:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 73,
+                        "nodeType": "EmitStatement",
+                        "src": "2245:39:0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": "@dev Registers or updates a fact provider.\n@param _factProvider representing the address of fact provider, which is used to provide facts\n@param _factProviderName representing user friendly name of fact provider, e.g. Monetha Wallet\n@param _factProviderReputationPassport representing reputation passport address of fact provider (if exists)\n@param _factProviderWebsite representing website of fact provider",
+            "id": 82,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 46,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 45,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 3452,
+                  "src": "1812:9:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1812:9:0"
+              }
+            ],
+            "name": "setFactProviderInfo",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 44,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 37,
+                  "name": "_factProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 82,
+                  "src": "1655:21:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 36,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1655:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 39,
+                  "name": "_factProviderName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 82,
+                  "src": "1686:24:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 38,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1686:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41,
+                  "name": "_factProviderReputationPassport",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 82,
+                  "src": "1720:39:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 40,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1720:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 43,
+                  "name": "_factProviderWebsite",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 82,
+                  "src": "1769:27:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 42,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1769:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1645:157:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 47,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1822:0:0"
+            },
+            "scope": 106,
+            "src": "1617:752:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 104,
+              "nodeType": "Block",
+              "src": "2590:176:0",
+              "statements": [
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 89,
+                        "name": "factProviders",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 35,
+                        "src": "2604:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+                          "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo storage ref)"
+                        }
+                      },
+                      "id": 91,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 90,
+                        "name": "_factProvider",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 84,
+                        "src": "2618:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "2604:28:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage",
+                        "typeString": "struct FactProviderRegistry.FactProviderInfo storage ref"
+                      }
+                    },
+                    "id": 92,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "initialized",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24,
+                    "src": "2604:40:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": null,
+                  "id": 103,
+                  "nodeType": "IfStatement",
+                  "src": "2600:160:0",
+                  "trueBody": {
+                    "id": 102,
+                    "nodeType": "Block",
+                    "src": "2646:114:0",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 96,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "UnaryOperation",
+                          "operator": "delete",
+                          "prefix": true,
+                          "src": "2660:35:0",
+                          "subExpression": {
+                            "argumentTypes": null,
+                            "baseExpression": {
+                              "argumentTypes": null,
+                              "id": 93,
+                              "name": "factProviders",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 35,
+                              "src": "2667:13:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+                                "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo storage ref)"
+                              }
+                            },
+                            "id": 95,
+                            "indexExpression": {
+                              "argumentTypes": null,
+                              "id": 94,
+                              "name": "_factProvider",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 84,
+                              "src": "2681:13:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "2667:28:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage",
+                              "typeString": "struct FactProviderRegistry.FactProviderInfo storage ref"
+                            }
+                          },
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 97,
+                        "nodeType": "ExpressionStatement",
+                        "src": "2660:35:0"
+                      },
+                      {
+                        "eventCall": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 99,
+                              "name": "_factProvider",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 84,
+                              "src": "2735:13:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            ],
+                            "id": 98,
+                            "name": "FactProviderDeleted",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 22,
+                            "src": "2715:19:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                              "typeString": "function (address)"
+                            }
+                          },
+                          "id": 100,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2715:34:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 101,
+                        "nodeType": "EmitStatement",
+                        "src": "2710:39:0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": "@dev Removes a fact provider from the registry.\n@param _factProvider representing the address of fact provider",
+            "id": 105,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 87,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 86,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 3452,
+                  "src": "2580:9:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "2580:9:0"
+              }
+            ],
+            "name": "deleteFactProviderInfo",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 85,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 84,
+                  "name": "_factProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 105,
+                  "src": "2548:21:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 83,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2548:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2547:23:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 88,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2590:0:0"
+            },
+            "scope": 106,
+            "src": "2516:250:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 107,
+        "src": "375:2393:0"
+      }
+    ],
+    "src": "0:2768:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/C/src/monetha/reputation-js-sdk-example/deployer/tmp/contracts/FactProviderRegistry.sol",
+    "exportedSymbols": {
+      "FactProviderRegistry": [
+        106
+      ]
+    },
+    "id": 107,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/ownership/Ownable.sol",
+        "file": "openzeppelin-solidity/contracts/ownership/Ownable.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 107,
+        "sourceUnit": 3505,
+        "src": "26:63:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/ownership/HasNoEther.sol",
+        "file": "openzeppelin-solidity/contracts/ownership/HasNoEther.sol",
+        "id": 3,
+        "nodeType": "ImportDirective",
+        "scope": 107,
+        "sourceUnit": 3394,
+        "src": "90:66:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/ownership/HasNoTokens.sol",
+        "file": "openzeppelin-solidity/contracts/ownership/HasNoTokens.sol",
+        "id": 4,
+        "nodeType": "ImportDirective",
+        "scope": 107,
+        "sourceUnit": 3419,
+        "src": "157:67:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 5,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3504,
+              "src": "408:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$3504",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 6,
+            "nodeType": "InheritanceSpecifier",
+            "src": "408:7:0"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 7,
+              "name": "HasNoEther",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3393,
+              "src": "417:10:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_HasNoEther_$3393",
+                "typeString": "contract HasNoEther"
+              }
+            },
+            "id": 8,
+            "nodeType": "InheritanceSpecifier",
+            "src": "417:10:0"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 9,
+              "name": "HasNoTokens",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3418,
+              "src": "429:11:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_HasNoTokens_$3418",
+                "typeString": "contract HasNoTokens"
+              }
+            },
+            "id": 10,
+            "nodeType": "InheritanceSpecifier",
+            "src": "429:11:0"
+          }
+        ],
+        "contractDependencies": [
+          3357,
+          3393,
+          3418,
+          3504
+        ],
+        "contractKind": "contract",
+        "documentation": "@title FactProviderRegistry\n@dev This contract works as a registry of known fact providers that are using Monetha reputation platform.",
+        "fullyImplemented": true,
+        "id": 106,
+        "linearizedBaseContracts": [
+          106,
+          3418,
+          3357,
+          3393,
+          3504
+        ],
+        "name": "FactProviderRegistry",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": "@dev This event will be emitted every time a new fact provider is registered",
+            "id": 14,
+            "name": "FactProviderAdded",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12,
+                  "indexed": true,
+                  "name": "factProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 14,
+                  "src": "571:28:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 11,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "571:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "570:30:0"
+            },
+            "src": "547:54:0"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev This event will be emitted every time the info of a fact provider is updated",
+            "id": 18,
+            "name": "FactProviderUpdated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 17,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16,
+                  "indexed": true,
+                  "name": "factProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 18,
+                  "src": "738:28:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 15,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "738:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "737:30:0"
+            },
+            "src": "712:56:0"
+          },
+          {
+            "anonymous": false,
+            "documentation": "@dev This event will be emitted every time the fact provider is removed from the registry",
+            "id": 22,
+            "name": "FactProviderDeleted",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 21,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 20,
+                  "indexed": true,
+                  "name": "factProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 22,
+                  "src": "913:28:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 19,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "913:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "912:30:0"
+            },
+            "src": "887:56:0"
+          },
+          {
+            "canonicalName": "FactProviderRegistry.FactProviderInfo",
+            "id": 31,
+            "members": [
+              {
+                "constant": false,
+                "id": 24,
+                "name": "initialized",
+                "nodeType": "VariableDeclaration",
+                "scope": 31,
+                "src": "983:16:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 23,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "983:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26,
+                "name": "name",
+                "nodeType": "VariableDeclaration",
+                "scope": 31,
+                "src": "1009:11:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 25,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1009:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 28,
+                "name": "reputation_passport",
+                "nodeType": "VariableDeclaration",
+                "scope": 31,
+                "src": "1030:27:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 27,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1030:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 30,
+                "name": "website",
+                "nodeType": "VariableDeclaration",
+                "scope": 31,
+                "src": "1067:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 29,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1067:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "FactProviderInfo",
+            "nodeType": "StructDefinition",
+            "scope": 106,
+            "src": "949:139:0",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 35,
+            "name": "factProviders",
+            "nodeType": "VariableDeclaration",
+            "scope": 106,
+            "src": "1094:57:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+              "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo)"
+            },
+            "typeName": {
+              "id": 34,
+              "keyType": {
+                "id": 32,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "1102:7:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1094:36:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+                "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 33,
+                "name": "FactProviderInfo",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 31,
+                "src": "1113:16:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage_ptr",
+                  "typeString": "struct FactProviderRegistry.FactProviderInfo"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 81,
+              "nodeType": "Block",
+              "src": "1822:547:0",
+              "statements": [
+                {
+                  "assignments": [],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 49,
+                      "name": "initializedFactProvider",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 82,
+                      "src": "1832:28:0",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "typeName": {
+                        "id": 48,
+                        "name": "bool",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1832:4:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 50,
+                  "initialValue": null,
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1832:28:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 56,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 51,
+                      "name": "initializedFactProvider",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49,
+                      "src": "1870:23:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 52,
+                          "name": "factProviders",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 35,
+                          "src": "1896:13:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+                            "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo storage ref)"
+                          }
+                        },
+                        "id": 54,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 53,
+                          "name": "_factProvider",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 37,
+                          "src": "1910:13:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "1896:28:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage",
+                          "typeString": "struct FactProviderRegistry.FactProviderInfo storage ref"
+                        }
+                      },
+                      "id": 55,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "initialized",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 24,
+                      "src": "1896:40:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "1870:66:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 57,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1870:66:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 67,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 58,
+                        "name": "factProviders",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 35,
+                        "src": "1947:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+                          "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo storage ref)"
+                        }
+                      },
+                      "id": 60,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 59,
+                        "name": "_factProvider",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 37,
+                        "src": "1961:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "1947:28:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage",
+                        "typeString": "struct FactProviderRegistry.FactProviderInfo storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "74727565",
+                          "id": 62,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "bool",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "2023:4:0",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          },
+                          "value": "true"
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 63,
+                          "name": "_factProviderName",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 39,
+                          "src": "2048:17:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_calldata_ptr",
+                            "typeString": "string calldata"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 64,
+                          "name": "_factProviderReputationPassport",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 41,
+                          "src": "2101:31:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 65,
+                          "name": "_factProviderWebsite",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 43,
+                          "src": "2156:20:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_calldata_ptr",
+                            "typeString": "string calldata"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 61,
+                        "name": "FactProviderInfo",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 31,
+                        "src": "1978:16:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_FactProviderInfo_$31_storage_ptr_$",
+                          "typeString": "type(struct FactProviderRegistry.FactProviderInfo storage pointer)"
+                        }
+                      },
+                      "id": 66,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "initialized",
+                        "name",
+                        "reputation_passport",
+                        "website"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "1978:213:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FactProviderInfo_$31_memory",
+                        "typeString": "struct FactProviderRegistry.FactProviderInfo memory"
+                      }
+                    },
+                    "src": "1947:244:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage",
+                      "typeString": "struct FactProviderRegistry.FactProviderInfo storage ref"
+                    }
+                  },
+                  "id": 68,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1947:244:0"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "id": 69,
+                    "name": "initializedFactProvider",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 49,
+                    "src": "2206:23:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "id": 79,
+                    "nodeType": "Block",
+                    "src": "2301:62:0",
+                    "statements": [
+                      {
+                        "eventCall": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 76,
+                              "name": "_factProvider",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 37,
+                              "src": "2338:13:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            ],
+                            "id": 75,
+                            "name": "FactProviderAdded",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 14,
+                            "src": "2320:17:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                              "typeString": "function (address)"
+                            }
+                          },
+                          "id": 77,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2320:32:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 78,
+                        "nodeType": "EmitStatement",
+                        "src": "2315:37:0"
+                      }
+                    ]
+                  },
+                  "id": 80,
+                  "nodeType": "IfStatement",
+                  "src": "2202:161:0",
+                  "trueBody": {
+                    "id": 74,
+                    "nodeType": "Block",
+                    "src": "2231:64:0",
+                    "statements": [
+                      {
+                        "eventCall": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 71,
+                              "name": "_factProvider",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 37,
+                              "src": "2270:13:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            ],
+                            "id": 70,
+                            "name": "FactProviderUpdated",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 18,
+                            "src": "2250:19:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                              "typeString": "function (address)"
+                            }
+                          },
+                          "id": 72,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2250:34:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 73,
+                        "nodeType": "EmitStatement",
+                        "src": "2245:39:0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": "@dev Registers or updates a fact provider.\n@param _factProvider representing the address of fact provider, which is used to provide facts\n@param _factProviderName representing user friendly name of fact provider, e.g. Monetha Wallet\n@param _factProviderReputationPassport representing reputation passport address of fact provider (if exists)\n@param _factProviderWebsite representing website of fact provider",
+            "id": 82,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 46,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 45,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 3452,
+                  "src": "1812:9:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1812:9:0"
+              }
+            ],
+            "name": "setFactProviderInfo",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 44,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 37,
+                  "name": "_factProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 82,
+                  "src": "1655:21:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 36,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1655:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 39,
+                  "name": "_factProviderName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 82,
+                  "src": "1686:24:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 38,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1686:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41,
+                  "name": "_factProviderReputationPassport",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 82,
+                  "src": "1720:39:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 40,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1720:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 43,
+                  "name": "_factProviderWebsite",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 82,
+                  "src": "1769:27:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 42,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1769:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1645:157:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 47,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1822:0:0"
+            },
+            "scope": 106,
+            "src": "1617:752:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 104,
+              "nodeType": "Block",
+              "src": "2590:176:0",
+              "statements": [
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 89,
+                        "name": "factProviders",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 35,
+                        "src": "2604:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+                          "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo storage ref)"
+                        }
+                      },
+                      "id": 91,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 90,
+                        "name": "_factProvider",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 84,
+                        "src": "2618:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "2604:28:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage",
+                        "typeString": "struct FactProviderRegistry.FactProviderInfo storage ref"
+                      }
+                    },
+                    "id": 92,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "initialized",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24,
+                    "src": "2604:40:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": null,
+                  "id": 103,
+                  "nodeType": "IfStatement",
+                  "src": "2600:160:0",
+                  "trueBody": {
+                    "id": 102,
+                    "nodeType": "Block",
+                    "src": "2646:114:0",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 96,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "UnaryOperation",
+                          "operator": "delete",
+                          "prefix": true,
+                          "src": "2660:35:0",
+                          "subExpression": {
+                            "argumentTypes": null,
+                            "baseExpression": {
+                              "argumentTypes": null,
+                              "id": 93,
+                              "name": "factProviders",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 35,
+                              "src": "2667:13:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_FactProviderInfo_$31_storage_$",
+                                "typeString": "mapping(address => struct FactProviderRegistry.FactProviderInfo storage ref)"
+                              }
+                            },
+                            "id": 95,
+                            "indexExpression": {
+                              "argumentTypes": null,
+                              "id": 94,
+                              "name": "_factProvider",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 84,
+                              "src": "2681:13:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "2667:28:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_FactProviderInfo_$31_storage",
+                              "typeString": "struct FactProviderRegistry.FactProviderInfo storage ref"
+                            }
+                          },
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 97,
+                        "nodeType": "ExpressionStatement",
+                        "src": "2660:35:0"
+                      },
+                      {
+                        "eventCall": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 99,
+                              "name": "_factProvider",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 84,
+                              "src": "2735:13:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            ],
+                            "id": 98,
+                            "name": "FactProviderDeleted",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 22,
+                            "src": "2715:19:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                              "typeString": "function (address)"
+                            }
+                          },
+                          "id": 100,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2715:34:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 101,
+                        "nodeType": "EmitStatement",
+                        "src": "2710:39:0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": "@dev Removes a fact provider from the registry.\n@param _factProvider representing the address of fact provider",
+            "id": 105,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 87,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 86,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 3452,
+                  "src": "2580:9:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "2580:9:0"
+              }
+            ],
+            "name": "deleteFactProviderInfo",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 85,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 84,
+                  "name": "_factProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 105,
+                  "src": "2548:21:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 83,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2548:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2547:23:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 88,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2590:0:0"
+            },
+            "scope": 106,
+            "src": "2516:250:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 107,
+        "src": "375:2393:0"
+      }
+    ],
+    "src": "0:2768:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2019-10-29T13:00:35.378Z"
+}
