@@ -23,11 +23,22 @@ const BN = crypto.BN;
   await write(PassportLogic.abi, passAddr, 'setString', factKey, factValue);
   console.log(`Written a string fact "${factValue}"`);
 
-  // React string fact
+  // Read string fact
   const readStringResult = await read(PassportLogic.abi, passAddr, 'getString', myAccount.address, factKey);
   const readFactValue = readStringResult.callResult.value;
-  console.log(`Read fact value: "${readFactValue}"`)
+  console.log(`Read fact value: "${readFactValue}"`);
 
+  // Write private data hash fact
+  const dataIpfsHash = 'FAKE_IPFS_HASH';
+  const dataKeyHash = '0x46414b455f4b45595f4841534800000000000000000000000000000000000000';
+  await write(PassportLogic.abi, passAddr, 'setPrivateDataHashes', factKey, dataIpfsHash, dataKeyHash);
+  console.log(`Written a private data hash fact "${dataIpfsHash}, ${dataKeyHash}"`);
+
+  // Read private data hash fact
+  const readPrivateDataHashResult = await read(PassportLogic.abi, passAddr, 'getPrivateDataHashes', myAccount.address, factKey);
+  console.log(`Read fact value: "${JSON.stringify(readPrivateDataHashResult.callResult)}"`);
+
+  console.log('DONE!');
 })().catch(e => {
   console.error(e);
 });
