@@ -4,7 +4,7 @@
   "description": "Test for verifiable data smart contracts on harmony network",
   "main": "truffle.js",
   "dependencies": {
-    "@harmony-js/core": "0.1.32",
+    "@harmony-js/core": "0.1.36",
     "tslib": "^1.10.0",
     "openzeppelin-solidity": "^2.3.0"
   },

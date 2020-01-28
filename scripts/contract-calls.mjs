@@ -1,30 +1,40 @@
-import { harmony, contracts } from './harmony';
+import { harmony, contracts, myAccount } from './harmony';
 import crypto from '@harmony-js/crypto';
+import PassportLogic from '../build/contracts/PassportLogic.json';
 import PassportLogicRegistry from '../build/contracts/PassportLogicRegistry.json';
 import PassportFactory from '../build/contracts/PassportFactory.json';
 
 const BN = crypto.BN;
 
 (async () => {
-  console.log('Testing: getCurrentPassportLogicVersion');
-  let result = await call(PassportLogicRegistry.abi, contracts.passportRegistry, 'getCurrentPassportLogicVersion');
-  console.log(result.callResult);
 
-  console.log('Testing: getRegistry');
-  result = await call(PassportFactory.abi, contracts.passportFactory, 'getRegistry');
-  console.log(result.callResult);
+  // Create passport
+  const passReceipt = await write(PassportFactory.abi, contracts.passportFactory, 'createPassport');
+  const passAddr = getPassportAddress(passReceipt);
+  console.log(`Created passport address ${passAddr}.`);
 
-  console.log('Testing: createPassport');
-  result = await send(PassportFactory.abi, contracts.passportFactory, 'createPassport');
-  console.log(result);
+  // Claim ownership
+  await write(PassportLogic.abi, passAddr, 'claimOwnership');
+  console.log('Ownership claimed.')
+
+  // Write string fact
+  const factKey = '0x1234567891234567891234567891234567891234567891234567891234567891';
+  const factValue = 'This is a test string';
+  await write(PassportLogic.abi, passAddr, 'setString', factKey, factValue);
+  console.log(`Written a string fact "${factValue}"`);
+
+  // React string fact
+  const readStringResult = await read(PassportLogic.abi, passAddr, 'getString', myAccount.address, factKey);
+  const readFactValue = readStringResult.callResult.value;
+  console.log(`Read fact value: "${readFactValue}"`)
 
 })().catch(e => {
   console.error(e);
 });
 
-// #region -------------- Call contract method -------------------------------------------------------------------
+// #region -------------- Call read-only contract method -------------------------------------------------------------------
 
-async function call(abi, contractAddress, method, ...args) {
+async function read(abi, contractAddress, method, ...args) {
   const deployedContract = harmony.contracts.createContract(
     abi,
     contractAddress
@@ -46,9 +56,9 @@ async function call(abi, contractAddress, method, ...args) {
 
 // #endregion
 
-// #region -------------- Deploy contract -------------------------------------------------------------------
+// #region -------------- Call writing contract method -------------------------------------------------------------------
 
-async function send(abi, contractAddress, method, ...args) {
+async function write(abi, contractAddress, method, ...args) {
   const deployedContract = harmony.contracts.createContract(
     abi,
     contractAddress
@@ -73,6 +83,23 @@ async function send(abi, contractAddress, method, ...args) {
       reject(err);
     }
   });
+}
+
+// #endregion
+
+// #region -------------- Passport properties -------------------------------------------------------------------
+
+function getPassportAddress(receipt) {
+  if (!receipt || !receipt.logs || receipt.logs.length === 0) {
+    throw new Error('createPassport receipt or its logs are empty');
+  }
+
+  const { topics } = receipt.logs[0];
+  if (!topics || topics.length < 2) {
+    throw new Error('createPassport receipt log topics are invalid')
+  }
+
+  return `0x${topics[1].slice(26)}`;
 }
 
 // #endregion

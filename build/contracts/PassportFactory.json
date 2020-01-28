@@ -2931,11 +2931,10 @@
         }
       },
       "links": {},
-      "address": "0xB6E2391052c716A359ed426eB464eAe2e22612E7",
-      "transactionHash": "0x71ce77ca68d7f737d8908fa62f0600dd255078d04bce330f9aeaa40d6cb5da50"
+      "address": "0xC4F3bfe6DBad3838e68cC5286eE1313220747487",
+      "transactionHash": "0xbdda7cc7ab44fcc7851a362953baa03b63780a0f11d1901d355b819204a32494"
     }
   },
-  "schemaVersion": "3.0.19",
-  "updatedAt": "2019-12-05T14:14:58.380Z",
-  "networkType": "ethereum"
+  "schemaVersion": "3.0.16",
+  "updatedAt": "2020-01-28T13:34:39.255Z"
 }

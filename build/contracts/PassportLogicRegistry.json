@@ -4282,11 +4282,10 @@
         }
       },
       "links": {},
-      "address": "0xcd45FdE7086BF341045dd4d6aba2e9B6121222fA",
-      "transactionHash": "0x85a534865ddf161fad73bcf1f5e3ee2f3096f541e2966d3fb921270fcbc38756"
+      "address": "0xfA63aa1B35AbEa20e880778A0Bd9657172Ee6051",
+      "transactionHash": "0x7ecf60c6f65866b95f89885ca331f91d5af7fdaccdfa787c4069b2221c7ff3a7"
     }
   },
-  "schemaVersion": "3.0.19",
-  "updatedAt": "2019-12-05T14:14:58.377Z",
-  "networkType": "ethereum"
+  "schemaVersion": "3.0.16",
+  "updatedAt": "2020-01-28T13:34:39.249Z"
 }

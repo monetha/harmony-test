@@ -2626,11 +2626,10 @@
         }
       },
       "links": {},
-      "address": "0xa7833F8E35d5ffbA1A181cA010BbD197751Fd810",
-      "transactionHash": "0x2bb27e3e38061eb2733e2d9fe7cb70ef6f607ee9cac259a01be882e1643b5823"
+      "address": "0x8d0c56C099f2816B6534eB1d74543846EC558357",
+      "transactionHash": "0x2a835b11170dca9bc1bd275d46fa220a9fc7f702601f7264da1197c980310d14"
     }
   },
-  "schemaVersion": "3.0.19",
-  "updatedAt": "2019-12-05T14:14:58.368Z",
-  "networkType": "ethereum"
+  "schemaVersion": "3.0.16",
+  "updatedAt": "2020-01-28T13:34:39.242Z"
 }
